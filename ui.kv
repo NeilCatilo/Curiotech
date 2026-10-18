@@ -1,0 +1,101 @@
+#:import dp kivy.metrics.dp
+#:import sp kivy.metrics.sp
+
+<Copy>:
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'middle'
+    font_name: 'Display' if self.heading else 'Body'
+    font_size: sp(self.base_size * app.text_scale)
+    color: app.palette['accent_ink'] if self.tone == 'accent' else app.palette[self.tone]
+    disabled_color: self.color
+    line_height: 1.18
+
+<Page>:
+    canvas.before:
+        Color:
+            rgba: app.palette['background']
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<AppShell>:
+    canvas.before:
+        Color:
+            rgba: app.palette['background']
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Stack>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    spacing: dp(16)
+
+<AdaptiveGrid>:
+    cols: 2
+    size_hint_y: None
+    height: self.minimum_height
+    spacing: dp(8)
+
+<Surface>:
+    canvas.before:
+        Color:
+            rgba: self.fill if self.fill else app.palette['surface']
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(self.radius)]
+        Color:
+            rgba: app.palette['border'] if self.outlined else (0, 0, 0, 0)
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, dp(self.radius))
+            width: 1
+
+<Action>:
+    size_hint_y: None
+    height: max(dp(self.min_height), self.texture_size[1] + dp(24))
+    text_size: max(0, self.width - dp(self.text_padding)), None
+    font_name: 'Body'
+    font_size: sp(self.base_size * app.text_scale)
+    halign: 'center'
+    valign: 'middle'
+    color: app.palette['nav_text'] if self.kind == 'primary' else app.palette['text']
+    disabled_color: self.color
+    canvas.before:
+        Color:
+            rgba: self.fill if self.fill else (app.palette['accent'] if self.kind == 'primary' else (app.palette['soft'] if self.kind == 'secondary' or self.active else (0, 0, 0, 0)))
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(12)]
+    canvas.after:
+        Color:
+            rgba: app.palette['accent_ink'] if self.focus else (0, 0, 0, 0)
+        Line:
+            rounded_rectangle: (self.x + dp(2), self.y + dp(2), max(0, self.width - dp(4)), max(0, self.height - dp(4)), dp(10))
+            width: 1.5
+
+<IconButton>:
+    fill: app.palette['accent'] if self.kind == 'primary' else (app.palette['soft'] if self.kind == 'secondary' or self.active else (0, 0, 0, 0))
+    canvas.after:
+        Color:
+            rgba: app.palette['accent_ink'] if self.focus else (0, 0, 0, 0)
+        Line:
+            rounded_rectangle: (self.x + dp(2), self.y + dp(2), max(0, self.width - dp(4)), max(0, self.height - dp(4)), dp(10))
+            width: 1.5
+
+<TextInput>:
+    font_name: 'Body'
+    font_size: sp(16 * app.text_scale)
+    foreground_color: app.palette['text']
+    background_color: app.palette['surface']
+    cursor_color: app.palette['accent']
+    selection_color: app.palette['selection']
+    hint_text_color: app.palette['muted']
+    background_normal: ''
+    background_active: ''
+    padding: [dp(16), dp(17), dp(16), dp(14)]
