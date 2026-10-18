@@ -40,13 +40,30 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential git zip unzip autoconf automake libtool \
+            build-essential git zip unzip autoconf automake libtool libltdl-dev \
             pkg-config zlib1g-dev libncurses-dev libtinfo6 cmake \
             libffi-dev libssl-dev autopoint gettext patch
           echo "JAVA_HOME=$JAVA_HOME_17_X64" >> "$GITHUB_ENV"
           echo "$JAVA_HOME_17_X64/bin" >> "$GITHUB_PATH"
           rustc --version
           cargo --version
+
+      - name: Check libffi Autoconf prerequisite
+        run: |
+          # libffi calls LT_SYS_SYMBOL_USCORE, provided by libltdl-dev.
+          check_dir="$(mktemp -d "$RUNNER_TEMP/curiocitech-autoconf.XXXXXX")"
+          cd "$check_dir"
+          mkdir m4
+          cat > configure.ac <<'M4'
+          AC_INIT([curiocitech-build-check], [1.0])
+          AC_CONFIG_SRCDIR([configure.ac])
+          AC_CONFIG_MACRO_DIRS([m4])
+          AC_PROG_CC
+          LT_INIT
+          LT_SYS_SYMBOL_USCORE
+          AC_OUTPUT
+          M4
+          autoreconf --install --force --verbose
 
       - name: Install Buildozer
         run: |
