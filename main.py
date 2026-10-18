@@ -265,11 +265,20 @@ class CuriocitechApp(App):
 
     def on_pause(self):
         self.manager.get_screen("video").stop_video()
+        quiz = self.manager.get_screen("quiz")
+        quiz._backgrounded = True
+        quiz.pause_feedback()
         self.store.save()
         return True
 
+    def on_resume(self):
+        quiz = self.manager.get_screen("quiz")
+        quiz._backgrounded = False
+        quiz.resume_feedback()
+
     def on_stop(self):
         self.manager.get_screen("video").stop_video()
+        self.manager.get_screen("quiz").pause_feedback()
         self.store.save()
         if hasattr(self, "_audio_event"):
             self._audio_event.cancel()

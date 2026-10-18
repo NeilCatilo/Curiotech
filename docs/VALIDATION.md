@@ -10,7 +10,7 @@ translation coverage, matching format placeholders, language migration, ten loca
 guides, video-ID/origin validation, embed configuration and escaping, the mocked
 PyJNIus bridge, and Android source/permission integration.
 
-All 20 Kivy UI checks passed. `tools/smoke_ui.py` uses isolated preferences and
+All 24 Kivy UI checks passed. `tools/smoke_ui.py` uses isolated preferences and
 reports to `artifacts/mobile-v1.2/smoke-report.json`. It checks the single menu,
 all destinations, scrim/Back dismissal, language persistence, search in both
 languages, language changes during a quiz, completion recorded once, resource
@@ -19,6 +19,14 @@ Additional checks confirm the upper-left menu, Home's app introduction, offline
 numbered lessons, optional Learn more, and the native video route using a mock.
 Previews in that folder show the current mobile design, visually inspected at
 412 × 820 and 320 × 640, including Tagalog, larger text, and dark mode.
+
+The quiz restores the original eight scenarios, choices and answer keys, with
+repaired punctuation/line wrapping and matching Tagalog translations. Additional
+UI checks cover its two-column answer grid, green/red feedback, a real one-second
+Clock transition, duplicate-tap protection, and Yes/No summary actions. Pending
+transitions pause on menu opening, navigation and app backgrounding, and resume
+without skipping a question. Long Tagalog choices wrap at 320 px with larger
+text, with aligned answer tiles. Results are recorded once per completed quiz.
 
 The native `VideoPlayer.java` component compiled successfully with javac 23.0.2
 against Google's Android API 36 reference JAR, targeting Java 8 bytecode. Expected

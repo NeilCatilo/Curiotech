@@ -42,13 +42,17 @@ class SmokeApp(CuriocitechApp):
             lambda: self.capture('menu-tagalog'), self.dictionary,
             self.check_search, lambda: self.capture('dictionary-tagalog'),
             self.start_quiz, self.answer, lambda: self.capture('quiz-tagalog'),
-            self.switch_during_quiz, self.complete_quiz,
+            self.switch_during_quiz, self.resume_quiz_feedback,
+            lambda: None, lambda: None, self.check_quiz_feedback,
+            self.quiz_lifecycle, self.complete_quiz, self.quiz_summary_actions,
             self.library, lambda: self.capture('library-tagalog'), self.read_lesson,
             lambda: self.capture('reading-steps-tagalog'), self.learn_more,
             self.video_route, lambda: self.capture('video-preview-notice'), self.video_and_about,
             self.settings, lambda: self.capture('settings-tagalog-dark'),
             self.dialog_cancel, self.dialog_accept, self.menu_back_and_scrim,
             self.small_phone, lambda: self.capture('small-phone-tagalog'),
+            self.small_quiz, lambda: self.capture('quiz-small-tagalog'),
+            self.check_small_quiz, lambda: self.capture('quiz-small-answers-tagalog'),
             self.animated_navigation, self.check_animation, self.open_animated_menu,
             self.check_animated_menu, self.return_home,
             lambda: self.capture('home-tagalog'), self.finish,
@@ -144,12 +148,17 @@ class SmokeApp(CuriocitechApp):
 
     def answer(self):
         quiz = self.manager.get_screen('quiz')
+        assert quiz.answer_grid.cols == 2
+        assert len(quiz.answer_grid.children) == 4
         quiz.check_answer(quiz.session.question['answer'])
         quiz.check_answer(0)
         assert quiz.session.score == 1
         assert all(control.disabled for control in quiz.answer_buttons)
         assert any(control.text.startswith('Tamang sagot:') for control in quiz.answer_buttons)
-        self.passed('Tagalog quiz feedback and repeated-tap protection')
+        assert quiz.answer_buttons[quiz.session.question['answer']].feedback == 'correct'
+        assert quiz._advance_event is not None
+        quiz.pause_feedback()
+        self.passed('original two-column quiz with green correct feedback and repeated-tap protection')
 
     def switch_during_quiz(self):
         quiz = self.manager.get_screen('quiz')
@@ -164,7 +173,51 @@ class SmokeApp(CuriocitechApp):
         self.choose('start')
         self.manager.get_screen('start').start()
         assert quiz.session is session
+        quiz.pause_feedback()
         self.passed('changing language or visiting menu destinations preserves the active quiz')
+
+    def resume_quiz_feedback(self):
+        quiz = self.manager.get_screen('quiz')
+        self.feedback_index = quiz.session.index
+        quiz.resume_feedback()
+        event = quiz._advance_event
+        quiz.resume_feedback()
+        assert quiz._advance_event is event
+
+    def check_quiz_feedback(self):
+        quiz = self.manager.get_screen('quiz')
+        assert quiz.session.index == self.feedback_index + 1
+        assert quiz.session.selected is None
+        assert quiz._advance_event is None
+        assert all(not control.disabled for control in quiz.answer_buttons)
+        self.passed('one real Clock timer advances to exactly one next question automatically')
+
+    def quiz_lifecycle(self):
+        quiz = self.manager.get_screen('quiz')
+        correct = quiz.session.question['answer']
+        wrong = (correct + 1) % 4
+        quiz.check_answer(wrong)
+        assert quiz.answer_buttons[wrong].feedback == 'incorrect'
+        assert quiz.answer_buttons[correct].feedback == 'correct'
+        snapshot = (quiz.session.index, quiz.session.score, quiz.session.selected)
+        event = quiz._advance_event
+        self.on_pause()
+        assert quiz._advance_event is None and not event.is_triggered
+        self.on_resume()
+        assert quiz._advance_event is not None
+        event = quiz._advance_event
+        self.root.open_menu()
+        assert quiz._advance_event is None and not event.is_triggered
+        self.root.close_menu()
+        assert quiz._advance_event is not None
+        self.choose('settings')
+        assert quiz._advance_event is None
+        assert (quiz.session.index, quiz.session.score, quiz.session.selected) == snapshot
+        self.choose('start')
+        self.manager.get_screen('start').start()
+        assert quiz._advance_event is not None
+        quiz.pause_feedback()
+        self.passed('red incorrect feedback; timer pauses for background, menu and navigation, then resumes')
 
     def complete_quiz(self):
         quiz = self.manager.get_screen('quiz')
@@ -173,10 +226,28 @@ class SmokeApp(CuriocitechApp):
             if quiz.session.selected is None:
                 quiz.check_answer(quiz.session.question['answer'])
             quiz.next_question()
-        assert quiz.session.score == 8
+        assert quiz.session.score == 7
         quiz.render()
         assert self.store.data['progress']['completed'] == before + 1
         self.passed('all eight questions can finish; result saved exactly once')
+
+    def quiz_summary_actions(self):
+        quiz = self.manager.get_screen('quiz')
+        actions = [widget for widget in quiz.walk() if isinstance(widget, Action)]
+        next(widget for widget in actions if widget.text == self.tr('No')).dispatch('on_release')
+        assert self.manager.current == 'start'
+        previous = quiz.session
+        self.manager.get_screen('start').start()
+        assert quiz.session is not previous and quiz.session.score == 0
+        while not quiz.session.complete:
+            quiz.check_answer(quiz.session.question['answer'])
+            quiz.next_question()
+        previous = quiz.session
+        yes = next(widget for widget in quiz.walk() if isinstance(widget, Action) and widget.text == self.tr('Yes'))
+        yes.dispatch('on_release')
+        assert quiz.session is not previous and quiz.session.score == 0 and quiz.session.index == 0
+        assert quiz._advance_event is None
+        self.passed('original Yes restarts with a fresh quiz; No returns to the quiz introduction')
 
     def library(self):
         self.choose('Article')
@@ -301,6 +372,27 @@ class SmokeApp(CuriocitechApp):
         self.navigate('Article', section=True)
         self.navigate('video')
         self.go_back()
+
+    def small_quiz(self):
+        quiz = self.manager.get_screen('quiz')
+        quiz.begin()
+        quiz.session.questions.sort(
+            key=lambda question: len(self.tr(question['question']))
+            + max(len(self.tr(choice)) for choice in question['choices']), reverse=True)
+        self.navigate('quiz')
+
+    def check_small_quiz(self):
+        quiz = self.manager.get_screen('quiz')
+        assert Window.width == 320 and self.text_scale == 1.2
+        assert quiz.answer_grid.cols == 2
+        for control in quiz.answer_buttons:
+            assert control.height >= control.texture_size[1] + 23
+            assert control.texture_size[0] <= control.width - control.text_padding + 1
+        for left, right in (quiz.answer_buttons[:2], quiz.answer_buttons[2:]):
+            assert abs(left.height - right.height) < 1
+            assert abs(left.top - right.top) < 1
+        quiz.scroll.scroll_y = 0
+        self.passed('two-column Tagalog answers wrap without clipping at 320 px with larger text')
 
     def check_animation(self):
         assert self.manager.current == 'Article'

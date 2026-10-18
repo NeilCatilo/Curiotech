@@ -15,7 +15,7 @@ from ui import Copy, Glyph, Page, Stack, Surface, button, card, horizontal
 NAVIGATION = [
     ("main", "Home", "home"), ("dictionary", "Dictionary", "book"),
     ("Article", "Library", "library"), ("video", "Videos", "play"),
-    ("start", "Practice", "quiz"), ("settings", "Settings", "settings"),
+    ("start", "Quiz", "quiz"), ("settings", "Settings", "settings"),
     ("about_us", "About", "about"),
 ]
 
@@ -105,6 +105,7 @@ class AppShell(FloatLayout):
     def open_menu(self):
         if self.menu_view:
             return
+        self.manager.get_screen("quiz").pause_feedback()
         self.menu_view = MenuDrawer(self)
         self.menu_view.bind(on_dismiss=self._menu_dismissed)
         self.menu_view.open(animation=not App.get_running_app().reduced_motion)
@@ -115,6 +116,7 @@ class AppShell(FloatLayout):
 
     def _menu_dismissed(self, *_):
         self.menu_view = None
+        self.manager.get_screen("quiz").resume_feedback()
 
     def update_navigation(self, *_):
         self.menu_button.text = App.get_running_app().tr("Menu")
@@ -141,7 +143,7 @@ class MainScreen(Page):
         for icon, message in [("book", "Understand everyday technology words."),
                               ("library", "Follow simple, step-by-step guides."),
                               ("play", "Watch helpful videos inside the app."),
-                              ("quiz", "Practise with questions and explanations.")]:
+                              ("quiz", "Test your digital skills with situational questions.")]:
             row = BoxLayout(size_hint_y=None, spacing=dp(12))
             row.add_widget(Glyph(name=icon, pos_hint={"center_y": .5}))
             description = Copy(text=t(message), base_size=14, tone="muted")

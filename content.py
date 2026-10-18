@@ -32,30 +32,102 @@ TERMS = [
 ]
 
 QUESTIONS = [
-    {"topic": "Trustworthy information", "question": "A news story looks surprising. How can you check it before sharing?",
-     "choices": ["Share it if it has many likes.", "Compare it with independent, reputable sources and check the date.", "Trust it because a friend shared it.", "Read only the headline."], "answer": 1,
-     "explanation": "Check the source, author, date, and supporting evidence. Independent coverage helps you spot misleading or outdated claims."},
-    {"topic": "Learning a new app", "question": "You are trying an unfamiliar app. What is a helpful first step?",
-     "choices": ["Tap random buttons until something happens.", "Avoid the app entirely.", "Follow its getting-started guide and practise one task at a time.", "Share your password so someone else can do it."], "answer": 2,
-     "explanation": "Small steps make learning manageable. Use the app's official help and ask someone you trust when you need support."},
-    {"topic": "Safer passwords", "question": "Which approach gives a new account stronger protection?",
-     "choices": ["Reuse the password from your email.", "Use your name and birthday.", "Choose a long, unique password and enable two-step verification.", "Use a short word so it is easy to type."], "answer": 2,
-     "explanation": "A unique password limits the damage if another service is breached. A password manager can help, and two-step verification adds protection."},
-    {"topic": "Spotting scams", "question": "An unexpected message says you won a prize and asks you to open a link. What should you do?",
-     "choices": ["Open it quickly before the prize expires.", "Reply with your personal details.", "Forward it to everyone you know.", "Avoid the link; verify through the organisation's official website or phone number."], "answer": 3,
-     "explanation": "Urgency and unexpected prizes are common scam tactics. Use contact details you find independently, rather than those inside the message."},
-    {"topic": "Digital balance", "question": "Social media is taking time away from things you enjoy. What could help?",
-     "choices": ["Set a daily limit and plan time away from the screen.", "Keep scrolling until you feel tired.", "Turn on every notification.", "Ignore how much time you spend."], "answer": 0,
-     "explanation": "Small boundaries, fewer notifications, and regular breaks can help you stay in control of your time online."},
-    {"topic": "Working together", "question": "A friend shares a document in a collaboration tool you have never used. How can you begin?",
-     "choices": ["Give everyone full access to your account.", "Use the official help and ask your friend to show you the first steps.", "Download an unknown tool from a pop-up.", "Share your sign-in code in the document."], "answer": 1,
-     "explanation": "Learn through the tool's official guidance. Check sharing permissions and keep passwords and sign-in codes private."},
-    {"topic": "Personal information", "question": "A free app asks for access to your contacts, location, and photos. What should you do first?",
-     "choices": ["Allow everything automatically.", "Post your details publicly.", "Check why each permission is needed and decline unnecessary access.", "Assume every free app is safe."], "answer": 2,
-     "explanation": "Only grant access that is needed for the task. Review the privacy policy and consider another app if the request seems excessive."},
-    {"topic": "Checking viral content", "question": "A viral video claims a scientific breakthrough. What is a useful way to evaluate it?",
-     "choices": ["Believe it because it has many views.", "Assume every viral video is false.", "Share it to ask for likes.", "Find the original research and compare it with explanations from qualified sources."], "answer": 3,
-     "explanation": "Popularity is not evidence. Look for original sources, relevant expertise, and whether the claim matches what the research actually found."},
+    {
+        "topic": "Identifying Reliable Information Online",
+        "question": "You are reading a news article online, but you’re unsure if the website is trustworthy. What should you do?",
+        "choices": [
+            "Share the article on social media without verifying it.",
+            "Check the website’s 'About Us' page and look for information about the authors.",
+            "Search for similar articles on reputable news platforms.",
+            "Rely on the number of likes and comments to judge its credibility."
+        ],
+        "answer": 1,
+        "explanation": "Check the source, author, date, and supporting evidence. Independent coverage helps you spot misleading or outdated claims."
+    },
+    {
+        "topic": "Using New Software Tools",
+        "question": "Your workplace has introduced new project management software, but you are unfamiliar with it. How should you approach learning it?",
+        "choices": [
+            "Experiment with random buttons until you figure it out.",
+            "Watch tutorials and review the software's user guide.",
+            "Wait for someone else to teach you how to use it.",
+            "Avoid using the software and stick to old methods."
+        ],
+        "answer": 1,
+        "explanation": "Small steps make learning manageable. Use the app's official help and ask someone you trust when you need support."
+    },
+    {
+        "topic": "Strengthening Password Security",
+        "question": "You need to create a new password for your online bank account. What is the most secure approach?",
+        "choices": [
+            "Use your name and birthdate so it’s easy to remember.",
+            "Choose a long, random combination of letters, numbers, and special characters.",
+            "Use the same password you’ve used on other websites.",
+            "Write the password on a sticky note and attach it to your computer monitor."
+        ],
+        "answer": 1,
+        "explanation": "A unique password limits the damage if another service is breached. A password manager can help, and two-step verification adds protection."
+    },
+    {
+        "topic": "Avoiding Online Scams",
+        "question": "You receive an email claiming you’ve won a cash prize but need to provide personal information to claim it. What should you do?",
+        "choices": [
+            "Immediately provide the requested information.",
+            "Delete the email and block the sender.",
+            "Click on the link to investigate further.",
+            "Reply asking for more details about the prize."
+        ],
+        "answer": 1,
+        "explanation": "Urgency and unexpected prizes are common scam tactics. Use contact details you find independently, rather than those inside the message."
+    },
+    {
+        "topic": "Managing Digital Well-being",
+        "question": "You notice you are spending too much time on social media, affecting your productivity. What would be the best course of action?",
+        "choices": [
+            "Turn off your phone completely during work hours.",
+            "Set specific time limits for using social media apps.",
+            "Uninstall all social media apps permanently.",
+            "Ignore the problem and hope it resolves itself."
+        ],
+        "answer": 1,
+        "explanation": "Small boundaries, fewer notifications, and regular breaks can help you stay in control of your time online."
+    },
+    {
+        "topic": "Understanding Digital Collaboration",
+        "question": "You’re working on a group project, and a teammate shares a document for collaboration on a platform you’ve never used before. How do you handle this?",
+        "choices": [
+            "Request the teammate to use a platform you’re comfortable with.",
+            "Explore the platform, use its help feature, and ask teammates for tips.",
+            "Avoid participating until someone else uploads the final version.",
+            "Print the document and provide feedback in person instead."
+        ],
+        "answer": 1,
+        "explanation": "Learn through the tool's official guidance. Check sharing permissions and keep passwords and sign-in codes private."
+    },
+    {
+        "topic": "Protecting Personal Data",
+        "question": "You are signing up for a free online service, and it asks for extensive personal information, including your address and phone number. What is the best response?",
+        "choices": [
+            "Provide all the information to access the service.",
+            "Skip signing up and look for alternative platforms.",
+            "Read the privacy policy to understand how your data will be used.",
+            "Use false information to create the account."
+        ],
+        "answer": 2,
+        "explanation": "Only grant access that is needed for the task. Review the privacy policy and consider another app if the request seems excessive."
+    },
+    {
+        "topic": "Evaluating Media Content",
+        "question": "A video on social media is going viral, claiming a groundbreaking scientific discovery. How do you verify its authenticity?",
+        "choices": [
+            "Believe it because it has many views and shares.",
+            "Check the credentials of the source and look for peer-reviewed articles.",
+            "Assume it's fake because most viral content is unreliable.",
+            "Share it with friends to get their opinions."
+        ],
+        "answer": 1,
+        "explanation": "Popularity is not evidence. Look for original sources, relevant expertise, and whether the claim matches what the research actually found."
+    }
 ]
 
 ARTICLES = [

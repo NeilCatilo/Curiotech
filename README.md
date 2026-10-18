@@ -1,7 +1,7 @@
 # Curiocitech mobile
 
 A minimalist Android learning app in **English and Tagalog**. One upper-left Menu
-button opens every section: Home, Dictionary, Library, Videos, Practice, Settings,
+button opens every section: Home, Dictionary, Library, Videos, Quiz, Settings,
 and About. There are no app bars, bottom navigation, or desktop sidebar.
 
 ## Preview while developing
@@ -54,8 +54,11 @@ name, as required by the [YouTube embedded-player identity guidance](https://dev
 - Short screen fades and a sliding drawer, with a reduced-motion preference.
 - Saved appearance, text-size, language, and optional sound preferences. Sound
   starts off; the original click and answer effects are retained.
-- One offline dictionary and eight practice questions with explanations, explicit
-  advancement, repeated-tap protection, and saved completed scores.
+- One offline dictionary and the original eight situational quiz questions in
+  English and Tagalog. The quiz uses a two-column answer grid, green/red feedback,
+  automatic advancement after one second, and Yes/No choices to try again.
+  Repeated taps cannot change the score. Opening the menu, leaving the quiz, or
+  backgrounding the app pauses the pending transition. Completed scores are saved.
 - A Home page explaining the app, its learning sections, and how to begin.
 
 Unfinished practice is retained while the process stays alive. Android can end a

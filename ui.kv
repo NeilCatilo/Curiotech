@@ -79,6 +79,12 @@
             rounded_rectangle: (self.x + dp(2), self.y + dp(2), max(0, self.width - dp(4)), max(0, self.height - dp(4)), dp(10))
             width: 1.5
 
+<QuizAnswer>:
+    size_hint_y: 1
+    size_hint_min_y: max(dp(self.min_height), self.texture_size[1] + dp(24))
+    fill: (0.08, 0.38, 0.23, 1) if self.feedback == 'correct' else ((0.65, 0.14, 0.16, 1) if self.feedback == 'incorrect' else app.palette['soft'])
+    color: (1, 1, 1, 1) if self.feedback else app.palette['text']
+
 <IconButton>:
     fill: app.palette['accent'] if self.kind == 'primary' else (app.palette['soft'] if self.kind == 'secondary' or self.active else (0, 0, 0, 0))
     canvas.after:

@@ -3,6 +3,23 @@
 LANGUAGES = {"en": "English", "tl": "Tagalog"}
 
 TRANSLATIONS = {
+    "Quiz": "Pagsusulit",
+    "QUIZ ME!": "SUBUKAN ANG KAALAMAN!",
+    "8 situational questions. No timer to choose an answer.": "8 tanong tungkol sa mga sitwasyon. Walang takdang oras sa pagpili ng sagot.",
+    "Test your digital literacy": "Subukan ang iyong kaalamang digital",
+    "Answer each situation based on your understanding. Your score appears at the end.": "Sagutin ang bawat sitwasyon batay sa iyong pagkaunawa. Makikita ang iyong iskor sa dulo.",
+    "How to play": "Paano sumagot",
+    '1. Tap "Start Quiz".\n\n2. Choose an answer. Green means correct; red means incorrect.\n\n3. The next question appears automatically after a short pause. Keep answering until your score appears.': '1. Pindutin ang "Simulan ang pagsusulit".\n\n2. Pumili ng sagot. Berde ang tama; pula ang mali.\n\n3. Awtomatikong lilitaw ang susunod na tanong matapos ang maikling paghinto. Magpatuloy hanggang lumabas ang iyong iskor.',
+    "Start Quiz": "Simulan ang pagsusulit",
+    "Continue quiz": "Ipagpatuloy ang pagsusulit",
+    "Correct!": "Tama!",
+    "Incorrect. The correct answer is shown in green.": "Mali. Naka-berde ang tamang sagot.",
+    "Quiz complete": "Tapos na ang pagsusulit",
+    "You answered {score} out of {total} correctly!": "Nasagot mo nang tama ang {score} sa {total}!",
+    "Do you want to try again?": "Gusto mo bang subukan muli?",
+    "Yes": "Oo",
+    "No": "Hindi",
+    "Test your digital skills with situational questions.": "Subukan ang iyong kaalamang digital sa mga tanong tungkol sa mga sitwasyon.",
     "Menu": "Menu",
     "Close menu": "Isara ang menu",
     "Home": "Simula",

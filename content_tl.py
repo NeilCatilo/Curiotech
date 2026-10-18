@@ -29,54 +29,94 @@ TERM_MEANINGS_TL = {
 }
 
 QUIZ_TL = {
-    "A news story looks surprising. How can you check it before sharing?": {
-        "topic": "Mapagkakatiwalaang impormasyon",
-        "question": "Nakakagulat ang isang balita. Paano mo ito masusuri bago ibahagi?",
-        "choices": ["Ibahagi kung marami itong like.", "Ihambing sa mga hiwalay at mapagkakatiwalaang sanggunian at tingnan ang petsa.", "Paniwalaan dahil ibinahagi ito ng kaibigan.", "Basahin lang ang pamagat."],
-        "explanation": "Suriin ang pinagmulan, may-akda, petsa, at ebidensiya. Makatutulong ang mga hiwalay na ulat para matukoy ang mali o lumang impormasyon.",
+    "You are reading a news article online, but you’re unsure if the website is trustworthy. What should you do?": {
+        "topic": "Pagkilala sa mapagkakatiwalaang impormasyon online",
+        "question": "Nagbabasa ka ng balita online, pero hindi ka sigurado kung mapagkakatiwalaan ang website. Ano ang dapat mong gawin?",
+        "choices": [
+            "Ibahagi agad ang balita sa social media nang hindi sinusuri.",
+            "Tingnan ang pahinang \"About Us\" at ang impormasyon tungkol sa mga may-akda.",
+            "Maghanap ng kaparehong balita sa mga mapagkakatiwalaang plataporma ng balita.",
+            "Gamitin ang dami ng like at komento para malaman kung kapani-paniwala ito."
+        ],
+        "explanation": "Suriin ang pinagmulan, may-akda, petsa, at ebidensiya. Makatutulong ang mga hiwalay na ulat para matukoy ang mali o lumang impormasyon."
     },
-    "You are trying an unfamiliar app. What is a helpful first step?": {
-        "topic": "Pag-aaral ng bagong app",
-        "question": "Gumagamit ka ng app na hindi mo pa kilala. Ano ang makatutulong na unang hakbang?",
-        "choices": ["Pindutin ang kahit anong button hanggang may mangyari.", "Iwasang gamitin ang app.", "Sundin ang panimulang gabay at magsanay sa paisa-isang gawain.", "Ibigay ang password para iba na ang gumawa."],
-        "explanation": "Mas madaling matuto sa maliliit na hakbang. Gamitin ang opisyal na gabay ng app at humingi ng tulong sa taong pinagkakatiwalaan mo.",
+    "Your workplace has introduced new project management software, but you are unfamiliar with it. How should you approach learning it?": {
+        "topic": "Pag-aaral ng bagong software",
+        "question": "May bagong software para sa pamamahala ng proyekto sa trabaho, pero hindi mo pa ito alam gamitin. Paano mo ito pag-aaralan?",
+        "choices": [
+            "Pindutin ang kahit anong button hanggang matutuhan mo ito.",
+            "Manood ng mga tutorial at basahin ang gabay ng software.",
+            "Hintaying may ibang magturo sa iyo kung paano ito gamitin.",
+            "Iwasan ang software at gamitin na lang ang dating paraan."
+        ],
+        "explanation": "Mas madaling matuto sa maliliit na hakbang. Gamitin ang opisyal na gabay ng app at humingi ng tulong sa taong pinagkakatiwalaan mo."
     },
-    "Which approach gives a new account stronger protection?": {
-        "topic": "Mas ligtas na password",
-        "question": "Alin ang mas makapagpoprotekta sa isang bagong account?",
-        "choices": ["Gamitin muli ang password ng iyong email.", "Gamitin ang pangalan at kaarawan mo.", "Pumili ng mahaba at natatanging password at paganahin ang two-step verification.", "Gumamit ng maikling salita para madaling i-type."],
-        "explanation": "Nalilimitahan ng natatanging password ang pinsala kung malantad ang datos ng ibang serbisyo. Makatutulong ang password manager, at may dagdag na proteksiyon ang two-step verification.",
+    "You need to create a new password for your online bank account. What is the most secure approach?": {
+        "topic": "Pagpapalakas ng seguridad ng password",
+        "question": "Kailangan mong gumawa ng bagong password para sa iyong online bank account. Alin ang pinakaligtas na paraan?",
+        "choices": [
+            "Gamitin ang pangalan at kaarawan mo para madaling tandaan.",
+            "Pumili ng mahaba at random na kombinasyon ng mga letra, numero, at espesyal na karakter.",
+            "Gamitin ang password na ginagamit mo sa ibang website.",
+            "Isulat ang password sa sticky note at idikit sa monitor ng computer."
+        ],
+        "explanation": "Nalilimitahan ng natatanging password ang pinsala kung malantad ang datos ng ibang serbisyo. Makatutulong ang password manager, at may dagdag na proteksiyon ang two-step verification."
     },
-    "An unexpected message says you won a prize and asks you to open a link. What should you do?": {
-        "topic": "Pagkilala sa panloloko",
-        "question": "May di-inaasahang mensaheng nagsasabing nanalo ka at pinapabuksan ang isang link. Ano ang dapat mong gawin?",
-        "choices": ["Buksan agad bago mawalan ng bisa ang premyo.", "Ipadala ang iyong personal na impormasyon.", "Ipasa sa lahat ng kakilala mo.", "Huwag buksan ang link; tiyakin sa opisyal na website o numero ng organisasyon."],
-        "explanation": "Karaniwang panlilinlang ang pagmamadali at di-inaasahang premyo. Gumamit ng impormasyong pangkontak na ikaw mismo ang nakahanap, hindi ng nasa mensahe.",
+    "You receive an email claiming you’ve won a cash prize but need to provide personal information to claim it. What should you do?": {
+        "topic": "Pag-iwas sa panloloko online",
+        "question": "Nakatanggap ka ng email na nagsasabing nanalo ka ng pera, pero kailangan mong magbigay ng personal na impormasyon para makuha ito. Ano ang dapat mong gawin?",
+        "choices": [
+            "Ibigay agad ang hinihinging impormasyon.",
+            "Burahin ang email at i-block ang nagpadala.",
+            "Pindutin ang link para mag-imbestiga.",
+            "Sumagot at humingi ng dagdag na detalye tungkol sa premyo."
+        ],
+        "explanation": "Karaniwang panlilinlang ang pagmamadali at di-inaasahang premyo. Gumamit ng impormasyong pangkontak na ikaw mismo ang nakahanap, hindi ng nasa mensahe."
     },
-    "Social media is taking time away from things you enjoy. What could help?": {
+    "You notice you are spending too much time on social media, affecting your productivity. What would be the best course of action?": {
         "topic": "Balanse sa paggamit ng teknolohiya",
-        "question": "Nauubos sa social media ang oras para sa mga bagay na gusto mo. Ano ang makatutulong?",
-        "choices": ["Magtakda ng araw-araw na limitasyon at oras na malayo sa screen.", "Patuloy na mag-scroll hanggang mapagod.", "Buksan ang lahat ng notification.", "Huwag pansinin ang oras na ginugugol dito."],
-        "explanation": "Makatutulong ang mga limitasyon, mas kaunting notification, at regular na pahinga para makontrol ang oras online.",
+        "question": "Napapansin mong sobra ang oras mo sa social media at naaapektuhan ang iyong mga gawain. Ano ang pinakamainam mong gawin?",
+        "choices": [
+            "Patayin nang tuluyan ang telepono habang nagtatrabaho.",
+            "Magtakda ng tiyak na limitasyon sa oras ng paggamit ng mga social media app.",
+            "Permanenteng alisin ang lahat ng social media app.",
+            "Huwag pansinin ang problema at umasang kusa itong mawawala."
+        ],
+        "explanation": "Makatutulong ang mga limitasyon, mas kaunting notification, at regular na pahinga para makontrol ang oras online."
     },
-    "A friend shares a document in a collaboration tool you have never used. How can you begin?": {
-        "topic": "Pagtutulungan online",
-        "question": "May kaibigang nagbahagi ng dokumento sa tool na hindi mo pa nagagamit. Paano ka magsisimula?",
-        "choices": ["Bigyan ang lahat ng buong access sa iyong account.", "Gamitin ang opisyal na gabay at magpaturo sa kaibigan ng mga unang hakbang.", "Mag-download ng di-kilalang tool mula sa pop-up.", "Ilagay ang iyong sign-in code sa dokumento."],
-        "explanation": "Matuto gamit ang opisyal na gabay ng tool. Suriin ang mga pahintulot sa pagbabahagi at panatilihing pribado ang password at sign-in code.",
+    "You’re working on a group project, and a teammate shares a document for collaboration on a platform you’ve never used before. How do you handle this?": {
+        "topic": "Pag-unawa sa pagtutulungan online",
+        "question": "May pangkatang proyekto kayo at nagbahagi ang kasama mo ng dokumento sa platapormang hindi mo pa nagagamit. Paano ka kikilos?",
+        "choices": [
+            "Hilingin sa kasama na gumamit ng platapormang alam mo na.",
+            "Tuklasin ang plataporma, gamitin ang tulong nito, at humingi ng tip sa mga kasama.",
+            "Huwag munang makilahok hanggang may mag-upload ng pinal na bersiyon.",
+            "I-print ang dokumento at magbigay na lang ng puna nang personal."
+        ],
+        "explanation": "Matuto gamit ang opisyal na gabay ng tool. Suriin ang mga pahintulot sa pagbabahagi at panatilihing pribado ang password at sign-in code."
     },
-    "A free app asks for access to your contacts, location, and photos. What should you do first?": {
-        "topic": "Personal na impormasyon",
-        "question": "Humihingi ang libreng app ng access sa contacts, lokasyon, at mga larawan mo. Ano ang una mong dapat gawin?",
-        "choices": ["Awtomatikong payagan ang lahat.", "I-post sa publiko ang iyong impormasyon.", "Suriin kung bakit kailangan ang bawat pahintulot at tanggihan ang hindi kailangan.", "Isiping ligtas ang lahat ng libreng app."],
-        "explanation": "Ibigay lang ang access na kailangan sa gawain. Basahin ang patakaran sa pagkapribado at isaalang-alang ang ibang app kung sobra ang hinihingi.",
+    "You are signing up for a free online service, and it asks for extensive personal information, including your address and phone number. What is the best response?": {
+        "topic": "Pagprotekta sa personal na datos",
+        "question": "Nagsa-sign up ka sa libreng serbisyong online at humihingi ito ng maraming personal na impormasyon, pati address at numero ng telepono. Ano ang pinakamainam na tugon?",
+        "choices": [
+            "Ibigay ang lahat ng impormasyon para magamit ang serbisyo.",
+            "Huwag ituloy ang pag-sign up at maghanap ng ibang plataporma.",
+            "Basahin ang patakaran sa pagkapribado para malaman kung paano gagamitin ang iyong datos.",
+            "Gumamit ng pekeng impormasyon sa paggawa ng account."
+        ],
+        "explanation": "Ibigay lang ang access na kailangan sa gawain. Basahin ang patakaran sa pagkapribado at isaalang-alang ang ibang app kung sobra ang hinihingi."
     },
-    "A viral video claims a scientific breakthrough. What is a useful way to evaluate it?": {
-        "topic": "Pagsusuri ng viral na nilalaman",
-        "question": "May viral na video tungkol sa malaking tuklas sa agham. Paano mo ito masusuri?",
-        "choices": ["Paniwalaan dahil maraming nanood.", "Isiping peke ang lahat ng viral na video.", "Ibahagi para makakuha ng like.", "Hanapin ang orihinal na pananaliksik at ihambing sa paliwanag ng mga kwalipikadong sanggunian."],
-        "explanation": "Hindi ebidensiya ang kasikatan. Hanapin ang orihinal na sanggunian at tamang kaalaman, at tingnan kung tugma ang sinasabi sa totoong resulta ng pananaliksik.",
-    },
+    "A video on social media is going viral, claiming a groundbreaking scientific discovery. How do you verify its authenticity?": {
+        "topic": "Pagsusuri ng nilalaman sa media",
+        "question": "May viral na video sa social media na nagsasabing may malaking bagong tuklas sa agham. Paano mo susuriin kung totoo ito?",
+        "choices": [
+            "Paniwalaan dahil marami itong panonood at pagbabahagi.",
+            "Suriin ang kredensiyal ng pinagmulan at maghanap ng mga artikulong sinuri ng kapwa eksperto.",
+            "Isiping peke dahil hindi mapagkakatiwalaan ang karamihan sa viral na nilalaman.",
+            "Ibahagi sa mga kaibigan para makuha ang kanilang opinyon."
+        ],
+        "explanation": "Hindi ebidensiya ang kasikatan. Hanapin ang orihinal na sanggunian at tamang kaalaman, at tingnan kung tugma ang sinasabi sa totoong resulta ng pananaliksik."
+    }
 }
 
 RESOURCES_TL = {

@@ -112,11 +112,14 @@ References: [Android WebView](https://developer.android.com/develop/ui/views/lay
 ## Language verification
 
 - Change language from both the open drawer and Settings, then restart the app.
-- Review all 25 definitions, eight questions and all answer explanations with
+- Review all 25 definitions, eight original situational questions and choices with
   fluent Tagalog speakers from the intended audience.
 - Confirm English and Tagalog searches return the expected definitions.
 - Change language before and after submitting a quiz answer, and check that the
   answer order, selected choice, and score remain the same.
+- Check the two-column quiz, green/red feedback, automatic advancement, and Yes/No
+  summary controls. Open/close the menu and background/resume during feedback;
+  verify that the question pauses and then advances once.
 - Check long Tagalog text at larger text sizes, on 320/360 dp screens, and with
   Android system text scaling enabled.
 - Confirm external links show the browser/language notice. The app translates
