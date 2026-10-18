@@ -38,13 +38,21 @@ different keys. If Android rejects an update due to a signature mismatch, uninst
 the previous debug app first (this removes its saved settings and scores).
 Use one securely stored signing key for distributed release builds.
 
-The workflow has been checked locally but has not yet executed on GitHub. Download
+The updated workflow has been checked locally. A successful APK build, download
 and device playback still need end-to-end validation. The development toolchain
 tracks upstream changes; pin verified tool revisions before a production release.
 
 References: [manual workflow runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow),
 [workflow artifacts](https://docs.github.com/en/actions/tutorials/store-and-share-data),
 [Buildozer installation](https://buildozer.readthedocs.io/en/latest/installation/).
+
+If the build fails with `possibly undefined macro: LT_SYS_SYMBOL_USCORE`, check
+that `libltdl-dev` is in the Linux dependency installation step. The
+[upstream libffi recipe](https://github.com/kivy/python-for-android/blob/develop/pythonforandroid/recipes/libffi/__init__.py)
+requires that package. The workflow explicitly installs it and runs a minimal
+Autoconf macro-expansion check before starting Buildozer. After changing a workflow,
+commit the updated file and start a new **Run workflow** on the updated branch;
+rerunning an old job uses that old run's revision.
 
 ## Build on Linux or WSL
 
@@ -53,6 +61,7 @@ Install the system prerequisites from the
 Use a supported Linux Python environment; follow the toolchain's current Python,
 Cython, Java, SDK, and NDK requirements. Keep a WSL checkout inside the Linux
 filesystem rather than `/mnt/c`. Do not copy the Windows `.venv` to Linux.
+Include `libltdl-dev` in the system packages; libffi needs its Autoconf macros.
 
 ```bash
 python3.14 -m venv .venv-android

@@ -89,7 +89,8 @@ the run's **Artifacts** section and extract the ZIP to get the APK. The workflow
 must be on the repository's default branch to appear as a manual workflow.
 
 This creates a test APK. It does not publish the app or create a signed store
-release. The workflow has been checked locally but has not run on GitHub yet.
+release. The updated workflow has been checked locally; a successful GitHub APK
+build has not yet been verified.
 
 Android builds also use `buildozer.spec` on Linux or WSL. See
 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/VALIDATION.md](docs/VALIDATION.md).
