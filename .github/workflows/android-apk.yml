@@ -1,0 +1,92 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      accept_android_sdk_license:
+        description: 'I accept the Android SDK terms at https://developer.android.com/studio/terms'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Require Android SDK license acceptance
+        if: ${{ !inputs.accept_android_sdk_license }}
+        run: |
+          echo '::error::Review the Android SDK terms, then select the license checkbox when running this workflow.'
+          exit 1
+
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential git zip unzip autoconf automake libtool \
+            pkg-config zlib1g-dev libncurses-dev libtinfo6 cmake \
+            libffi-dev libssl-dev autopoint gettext patch
+          echo "JAVA_HOME=$JAVA_HOME_17_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_17_X64/bin" >> "$GITHUB_PATH"
+          rustc --version
+          cargo --version
+
+      - name: Install Buildozer
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install git+https://github.com/kivy/buildozer
+          python -m pip install legacy-cgi setuptools cython==0.29.34
+
+      - name: Check learning content and player bridge
+        run: python -m unittest discover -s tests -v
+
+      - name: Build debug APK
+        run: |
+          python - <<'PY'
+          import configparser
+          from pathlib import Path
+
+          # Only this disposable runner's copy accepts licenses automatically.
+          spec = Path('buildozer.spec')
+          config = configparser.RawConfigParser()
+          config.read(spec, encoding='utf-8')
+          config.set('app', 'android.accept_sdk_license', 'True')
+          with spec.open('w', encoding='utf-8') as stream:
+              config.write(stream)
+          PY
+          set -o pipefail
+          buildozer -v android debug 2>&1 | tee android-build.log
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Curiocitech-debug-apk
+          path: bin/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload build log
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Curiocitech-build-log
+          path: android-build.log
+          if-no-files-found: ignore
+          retention-days: 7
